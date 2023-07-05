@@ -25,6 +25,7 @@ RUN apt-get update -qq \
     libice6 \
     xdg-utils \
     libxml2 \
+    pandoc \
   && rm -rf /var/lib/apt/lists/* \
   # Install R packages
   && install2.r --error \
@@ -38,6 +39,8 @@ RUN apt-get update -qq \
     glue \
     pheatmap \
     ggpubr \
+    htmlwidgets \
+    plotly \
   && rm -rf /tmp/downloaded_packages/*
 
 # Database schema and table names.

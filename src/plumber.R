@@ -1,3 +1,4 @@
+library("plotly")
 # plumber.R defines plumber API
 #
 # This file should be run with the directory that contains this file as working
@@ -106,6 +107,53 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
   print(res_plot)
 }
 
+
+#* Get a single-gene single-disease all-GTEx-tissues TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param efoId:str one EFO ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-disease-gtex/plotly
+function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = efoId, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot
+}
+
+
+#* Get a single-gene single-disease all-GTEx-tissues TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param efoId:str one EFO ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-disease-gtex/plotly/json
+function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = efoId, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
+
+
 #* Get a single-gene single-disease all-TCGA TPM summary table
 #*
 #* @tag "Bulk tissue gene expression"
@@ -146,6 +194,52 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
 
   print(res_plot)
 }
+
+
+#* Get a single-gene single-disease all-TCGA TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param efoId:str one EFO ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-disease-tcga/plotly
+function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = efoId, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "exclude", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot
+}
+
+#* Get a single-gene single-disease all-TCGA TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param efoId:str one EFO ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-disease-tcga/plotly/json
+function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = efoId, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "exclude", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
 
 #* Get a single-gene single-disease all-TCGA all-GTEx TPM summary table
 #*
@@ -188,6 +282,53 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
   print(res_plot)
 }
 
+
+#* Get a single-gene single-disease all-TCGA all-GTEx TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param efoId:str one EFO ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-disease-tcga-gtex/plotly
+function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = efoId, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+}
+
+
+#* Get a single-gene single-disease all-TCGA all-GTEx TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param efoId:str one EFO ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-disease-tcga-gtex/plotly/json
+function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = efoId, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
+
 #* Get a single-gene all-diseases TPM summary table
 #*
 #* @tag "Bulk tissue gene expression"
@@ -224,6 +365,50 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
 
   print(res_plot)
 }
+
+
+
+#* Get a single-gene all-diseases TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-all-cancer/plotly
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "exclude", min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot
+}
+
+#* Get a single-gene all-diseases TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-all-cancer/plotly/json
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "exclude", min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
 
 #* Get a single-gene all-diseases all-GTEx-tissues-collapsed TPM summary table
 #*
@@ -264,6 +449,54 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
   print(res_plot)
 }
 
+
+
+#* Get a single-gene all-diseases all-GTEx-tissues-collapsed TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-all-cancer-collapsed-gtex/plotly
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", gtex_histology_group = "collapse",
+    min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot
+}
+
+
+#* Get a single-gene all-diseases all-GTEx-tissues-collapsed TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-all-cancer-collapsed-gtex/plotly/json
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", gtex_histology_group = "collapse",
+    min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
+
+
 #* Get a single-gene all-diseases all-GTEx-tissues TPM summary table
 #*
 #* @tag "Bulk tissue gene expression"
@@ -302,6 +535,52 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
 
   print(res_plot)
 }
+
+
+#* Get a single-gene all-diseases all-GTEx-tissues TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-all-cancer-gtex/plotly
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", gtex_histology_group = "tissue_subgroup",
+    min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot
+}
+
+
+#* Get a single-gene all-diseases all-GTEx-tissues TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-all-cancer-gtex/plotly/json
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", gtex_histology_group = "tissue_subgroup",
+    min_n_per_box = 3L)
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
 
 #* Get a single-gene all-diseases all-TCGA TPM summary table
 #*
@@ -342,6 +621,52 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
   print(res_plot)
 }
 
+
+#* Get a single-gene all-diseases all-TCGA TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-all-cancer-tcga/plotly
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "exclude", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot
+}
+
+
+
+#* Get a single-gene all-diseases all-TCGA TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-all-cancer-tcga/plotly/json
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "exclude", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
 #* Get a single-gene all-diseases all-TCGA all-GTEx TPM summary table
 #*
 #* @tag "Bulk tissue gene expression"
@@ -380,6 +705,51 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
 
   print(res_plot)
 }
+
+
+#* Get a single-gene all-diseases all-TCGA all-GTEx TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer htmlwidget
+#* @get /tpm/gene-all-cancer-tcga-gtex/plotly
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot
+}
+
+
+#* Get a single-gene all-diseases all-TCGA all-GTEx TPM boxplot
+#*
+#* @tag "Bulk tissue gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param yAxisScale:str linear or log10
+#* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
+#* @serializer json
+#* @get /tpm/gene-all-cancer-tcga-gtex/plotly/json
+function(ensemblId, yAxisScale, includeTumorDesc) {
+  gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
+    ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
+    gtex_sample_group = "require", min_n_per_box = 3L,
+    tcga_sample_group = "require")
+
+  res_plot <- get_gene_tpm_boxplot(
+    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
 
 
 
@@ -427,6 +797,64 @@ function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
   print(res_plot)
 }
 
+#* Get a heatmap of one disease and top differentially expressed genes
+#*
+#* @tag "Bulk tissue differential gene expression"
+#* @param efoId:str one EFO ID
+#* @param rankGenesBy:str cgc_all_gene_up_reg_rank, or cgc_all_gene_down_reg_rank, or cgc_all_gene_up_and_down_reg_rank, or cgc_pmtl_gene_up_reg_rank, or cgc_pmtl_gene_down_reg_rank, or cgc_pmtl_gene_up_and_down_reg_rank
+#* @param includeBoxplot:str true or false
+#* @param boxplotYAxisScale:str linear or log10
+#* @serializer htmlwidget
+#* @get /dge/top-gene-disease-gtex-diff-exp/plotly
+function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
+  # Not implemented parameter:
+  # - spec_desc_group
+  res_tbl <- get_one_efo_top_ensg_diff_exp_heatmap_tbl(
+    efo_id = efoId, rank_genes_by = rankGenesBy, max_gene_rank = 50,
+    cohort = NULL, min_n_samples_per_group = 3,
+    spec_desc_group = "primary_and_relapse_same_group")
+
+  res_plot <- get_one_efo_top_ensg_diff_exp_heatmap(
+    res_tbl, include_boxplot = includeBoxplot,
+    boxplot_y_axis_scale = boxplotYAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(
+  xaxis = list(
+    tickangle = -90  # Rotate labels vertically
+    )
+  )
+  plot
+}
+
+
+#* Get a heatmap of one disease and top differentially expressed genes
+#*
+#* @tag "Bulk tissue differential gene expression"
+#* @param efoId:str one EFO ID
+#* @param rankGenesBy:str cgc_all_gene_up_reg_rank, or cgc_all_gene_down_reg_rank, or cgc_all_gene_up_and_down_reg_rank, or cgc_pmtl_gene_up_reg_rank, or cgc_pmtl_gene_down_reg_rank, or cgc_pmtl_gene_up_and_down_reg_rank
+#* @param includeBoxplot:str true or false
+#* @param boxplotYAxisScale:str linear or log10
+#* @serializer json
+#* @get /dge/top-gene-disease-gtex-diff-exp/plotly/json
+function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
+  # Not implemented parameter:
+  # - spec_desc_group
+  res_tbl <- get_one_efo_top_ensg_diff_exp_heatmap_tbl(
+    efo_id = efoId, rank_genes_by = rankGenesBy, max_gene_rank = 50,
+    cohort = NULL, min_n_samples_per_group = 3,
+    spec_desc_group = "primary_and_relapse_same_group")
+
+  res_plot <- get_one_efo_top_ensg_diff_exp_heatmap(
+    res_tbl, include_boxplot = includeBoxplot,
+    boxplot_y_axis_scale = boxplotYAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
+
 #* Get a differential gene expression table of one gene and all diseases
 #*
 #* @tag "Bulk tissue differential gene expression"
@@ -464,6 +892,59 @@ function(ensemblId, includeBoxplot, boxplotYAxisScale) {
 
   print(res_plot)
 }
+
+#* Get a differential gene expression heatmap of one gene and all diseases
+#*
+#* @tag "Bulk tissue differential gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param includeBoxplot:str true or false
+#* @param boxplotYAxisScale:str linear or log10
+#* @serializer htmlwidget
+#* @get /dge/gene-all-cancer-gtex-diff-exp/plotly
+function(ensemblId, includeBoxplot, boxplotYAxisScale) {
+  # Not implemented parameter:
+  # - spec_desc_group
+  res_tbl <- get_one_ensg_all_efo_diff_exp_heatmap_tbl(
+    ensg_id = ensemblId, gene_symbol = NULL, min_n_samples_per_group = 3,
+    spec_desc_group = "primary_and_relapse_same_group")
+
+  res_plot <- get_one_ensg_all_efo_diff_exp_heatmap(
+    res_tbl, include_boxplot = includeBoxplot,
+    boxplot_y_axis_scale = boxplotYAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(
+  xaxis = list(
+    tickangle = -90  # Rotate labels vertically
+    )
+  )
+  plot
+}
+
+#* Get a differential gene expression heatmap of one gene and all diseases
+#*
+#* @tag "Bulk tissue differential gene expression"
+#* @param ensemblId:str one gene ENSG ID.
+#* @param includeBoxplot:str true or false
+#* @param boxplotYAxisScale:str linear or log10
+#* @serializer json
+#* @get /dge/gene-all-cancer-gtex-diff-exp/plotly/json
+function(ensemblId, includeBoxplot, boxplotYAxisScale) {
+  # Not implemented parameter:
+  # - spec_desc_group
+  res_tbl <- get_one_ensg_all_efo_diff_exp_heatmap_tbl(
+    ensg_id = ensemblId, gene_symbol = NULL, min_n_samples_per_group = 3,
+    spec_desc_group = "primary_and_relapse_same_group")
+
+  res_plot <- get_one_ensg_all_efo_diff_exp_heatmap(
+    res_tbl, include_boxplot = includeBoxplot,
+    boxplot_y_axis_scale = boxplotYAxisScale)
+
+  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plotly::plotly_json(plot, FALSE)
+}
+
+
 
 
 
