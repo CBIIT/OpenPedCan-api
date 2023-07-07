@@ -82,7 +82,7 @@ function(ensemblId, efoId, includeTumorDesc) {
     gtex_sample_group = "require", min_n_per_box = 3L)
 
   gene_tpm_boxplot_summary_tbl <- get_gene_tpm_boxplot_summary_tbl(
-    gene_tpm_boxplot_tbl)
+  gene_tpm_boxplot_tbl)
 
   return(gene_tpm_boxplot_summary_tbl)
 }
@@ -106,6 +106,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
 
   print(res_plot)
 }
+
 
 
 #* Get a single-gene single-disease all-GTEx-tissues TPM boxplot
@@ -144,11 +145,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     ensg_id = ensemblId, efo_id = efoId, include_tumor_desc = includeTumorDesc,
     gtex_sample_group = "require", min_n_per_box = 3L)
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return (gene_tpm_boxplot_tbl)
 }
 
 
@@ -233,11 +230,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gtex_sample_group = "exclude", min_n_per_box = 3L,
     tcga_sample_group = "require")
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(gene_tpm_boxplot_tbl)
 }
 
 
@@ -320,11 +313,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gtex_sample_group = "require", min_n_per_box = 3L,
     tcga_sample_group = "require")
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(gene_tpm_boxplot_tbl)
 }
 
 
@@ -401,11 +390,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     ensg_id = ensemblId, efo_id = NULL, include_tumor_desc = includeTumorDesc,
     gtex_sample_group = "exclude", min_n_per_box = 3L)
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(gene_tpm_boxplot_tbl)
 }
 
 
@@ -487,11 +472,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gtex_sample_group = "require", gtex_histology_group = "collapse",
     min_n_per_box = 3L)
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(gene_tpm_boxplot_tbl)
 }
 
 
@@ -573,11 +554,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gtex_sample_group = "require", gtex_histology_group = "tissue_subgroup",
     min_n_per_box = 3L)
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(gene_tpm_boxplot_tbl)
 }
 
 
@@ -659,11 +636,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gtex_sample_group = "exclude", min_n_per_box = 3L,
     tcga_sample_group = "require")
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(gene_tpm_boxplot_tbl)
 }
 
 
@@ -743,11 +716,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gtex_sample_group = "require", min_n_per_box = 3L,
     tcga_sample_group = "require")
 
-  res_plot <- get_gene_tpm_boxplot(
-    gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(gene_tpm_boxplot_tbl)
 }
 
 
@@ -838,19 +807,12 @@ function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
 #* @serializer json
 #* @get /dge/top-gene-disease-gtex-diff-exp/plotly/json
 function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
-  # Not implemented parameter:
-  # - spec_desc_group
-  res_tbl <- get_one_efo_top_ensg_diff_exp_heatmap_tbl(
+   res_tbl <- get_one_efo_top_ensg_diff_exp_heatmap_tbl(
     efo_id = efoId, rank_genes_by = rankGenesBy, max_gene_rank = 50,
     cohort = NULL, min_n_samples_per_group = 3,
     spec_desc_group = "primary_and_relapse_same_group")
 
-  res_plot <- get_one_efo_top_ensg_diff_exp_heatmap(
-    res_tbl, include_boxplot = includeBoxplot,
-    boxplot_y_axis_scale = boxplotYAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(res_tbl)
 }
 
 
@@ -930,18 +892,11 @@ function(ensemblId, includeBoxplot, boxplotYAxisScale) {
 #* @serializer json
 #* @get /dge/gene-all-cancer-gtex-diff-exp/plotly/json
 function(ensemblId, includeBoxplot, boxplotYAxisScale) {
-  # Not implemented parameter:
-  # - spec_desc_group
-  res_tbl <- get_one_ensg_all_efo_diff_exp_heatmap_tbl(
+   res_tbl <- get_one_ensg_all_efo_diff_exp_heatmap_tbl(
     ensg_id = ensemblId, gene_symbol = NULL, min_n_samples_per_group = 3,
     spec_desc_group = "primary_and_relapse_same_group")
 
-  res_plot <- get_one_ensg_all_efo_diff_exp_heatmap(
-    res_tbl, include_boxplot = includeBoxplot,
-    boxplot_y_axis_scale = boxplotYAxisScale)
-
-  plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plotly::plotly_json(plot, FALSE)
+  return(res_tbl)
 }
 
 
