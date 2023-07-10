@@ -76,4 +76,4 @@ source("src/get_one_ensg_all_efo_diff_exp_heatmap.R")
 source("src/get_one_ensg_all_efo_diff_exp_heatmap_tbl.R")
 
 # Adapted from https://www.rplumber.io/articles/quickstart.html
-plumber::pr_run(plumber::pr("src/plumber.R"), port = 80, host = "0.0.0.0")
+plumber::pr_run(plumber::pr("src/plumber.R"), port = 8081, host = "0.0.0.0")

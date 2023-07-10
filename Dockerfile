@@ -64,6 +64,6 @@ COPY ./src/ ./src/
 
 COPY ./db/r_interfaces/ ./db/r_interfaces/
 
-EXPOSE 80
+EXPOSE 8081
 
 ENTRYPOINT ["Rscript", "--vanilla", "main.R"]
