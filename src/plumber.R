@@ -94,7 +94,7 @@ function(ensemblId, efoId, includeTumorDesc) {
 #* @param efoId:str one EFO ID.
 #* @param yAxisScale:str linear or log10
 #* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
-#* @serializer png list(res = 300, width = 6000, height = 2700)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /tpm/gene-disease-gtex/plot
 function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
   gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
@@ -127,6 +127,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
   plot
 }
 
@@ -178,7 +179,7 @@ function(ensemblId, efoId, includeTumorDesc) {
 #* @param efoId:str one EFO ID.
 #* @param yAxisScale:str linear or log10
 #* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
-#* @serializer png list(res = 300, width = 5000, height = 3300)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /tpm/gene-disease-tcga/plot
 function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
   gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
@@ -212,6 +213,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
   plot
 }
 
@@ -261,7 +263,7 @@ function(ensemblId, efoId, includeTumorDesc) {
 #* @param efoId:str one EFO ID.
 #* @param yAxisScale:str linear or log10
 #* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
-#* @serializer png list(res = 300, width = 11000, height = 3300)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /tpm/gene-disease-tcga-gtex/plot
 function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
   gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
@@ -295,6 +297,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
 }
 
 
@@ -374,6 +377,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
   plot
 }
 
@@ -420,7 +424,7 @@ function(ensemblId, includeTumorDesc) {
 #* @param ensemblId:str one gene ENSG ID.
 #* @param yAxisScale:str linear or log10
 #* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
-#* @serializer png list(res = 300, width = 4500, height = 2700)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /tpm/gene-all-cancer-collapsed-gtex/plot
 function(ensemblId, yAxisScale, includeTumorDesc) {
   gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
@@ -454,6 +458,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
   plot
 }
 
@@ -503,7 +508,7 @@ function(ensemblId, includeTumorDesc) {
 #* @param ensemblId:str one gene ENSG ID.
 #* @param yAxisScale:str linear or log10
 #* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
-#* @serializer png list(res = 300, width = 7800, height = 2700)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /tpm/gene-all-cancer-gtex/plot
 function(ensemblId, yAxisScale, includeTumorDesc) {
   gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
@@ -536,6 +541,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
   plot
 }
 
@@ -584,7 +590,7 @@ function(ensemblId, includeTumorDesc) {
 #* @param ensemblId:str one gene ENSG ID.
 #* @param yAxisScale:str linear or log10
 #* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
-#* @serializer png list(res = 300, width = 8000, height = 3300)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /tpm/gene-all-cancer-tcga/plot
 function(ensemblId, yAxisScale, includeTumorDesc) {
   gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
@@ -617,6 +623,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
   plot
 }
 
@@ -665,7 +672,7 @@ function(ensemblId, includeTumorDesc) {
 #* @param ensemblId:str one gene ENSG ID.
 #* @param yAxisScale:str linear or log10
 #* @param includeTumorDesc:str primaryOnly, or relapseOnly, or primaryAndRelapseInSameBox, or primaryAndRelapseInDifferentBoxes.
-#* @serializer png list(res = 300, width = 15000, height = 3300)
+#* @serializer png list(width = 1200, height = 1800)
 #* @get /tpm/gene-all-cancer-tcga-gtex/plot
 function(ensemblId, yAxisScale, includeTumorDesc) {
   gene_tpm_boxplot_tbl <- get_tpm_endpoint_tbl(
@@ -698,6 +705,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
+  plot <- plot %>% plotly::layout(margin = list(t = 60))
   plot
 }
 
@@ -749,7 +757,7 @@ function(efoId, rankGenesBy) {
 #* @param rankGenesBy:str cgc_all_gene_up_reg_rank, or cgc_all_gene_down_reg_rank, or cgc_all_gene_up_and_down_reg_rank, or cgc_pmtl_gene_up_reg_rank, or cgc_pmtl_gene_down_reg_rank, or cgc_pmtl_gene_up_and_down_reg_rank
 #* @param includeBoxplot:str true or false
 #* @param boxplotYAxisScale:str linear or log10
-#* @serializer png list(res = 300, width = 7500, height = 3900)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /dge/top-gene-disease-gtex-diff-exp/plot
 function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
   # Not implemented parameter:
@@ -789,6 +797,7 @@ function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
   plot <- plot %>% plotly::layout(
+  margin = list(t = 60),
   xaxis = list(
     tickangle = -90  # Rotate labels vertically
     )
@@ -839,7 +848,7 @@ function(ensemblId) {
 #* @param ensemblId:str one gene ENSG ID.
 #* @param includeBoxplot:str true or false
 #* @param boxplotYAxisScale:str linear or log10
-#* @serializer png list(res = 300, width = 5900, height = 3900)
+#* @serializer png list(res = 300, width = 1200, height = 1800)
 #* @get /dge/gene-all-cancer-gtex-diff-exp/plot
 function(ensemblId, includeBoxplot, boxplotYAxisScale) {
   # Not implemented parameter:
@@ -876,6 +885,7 @@ function(ensemblId, includeBoxplot, boxplotYAxisScale) {
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
   plot <- plot %>% plotly::layout(
+  margin = list(t = 60),
   xaxis = list(
     tickangle = -90  # Rotate labels vertically
     )
