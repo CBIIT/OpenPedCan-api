@@ -127,7 +127,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18))
   plot
 }
 
@@ -213,7 +213,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18))
   plot
 }
 
@@ -297,7 +297,7 @@ function(ensemblId, efoId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18))
 }
 
 
@@ -377,7 +377,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18))
   plot
 }
 
@@ -458,7 +458,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18),)
   plot
 }
 
@@ -541,7 +541,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18),)
   plot
 }
 
@@ -623,7 +623,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18))
   plot
 }
 
@@ -705,7 +705,7 @@ function(ensemblId, yAxisScale, includeTumorDesc) {
     gene_tpm_boxplot_tbl, y_axis_scale = yAxisScale)
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
-  plot <- plot %>% plotly::layout(margin = list(t = 60))
+  plot <- plot %>% plotly::layout(margin = list(t = 90), titlefont = list(size = 18),)
   plot
 }
 
@@ -797,7 +797,8 @@ function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
   plot <- plot %>% plotly::layout(
-  margin = list(t = 60),
+  margin = list(t = 90),
+  titlefont = list(size = 18),
   xaxis = list(
     tickangle = -90  # Rotate labels vertically
     )
@@ -885,7 +886,7 @@ function(ensemblId, includeBoxplot, boxplotYAxisScale) {
 
   plot <- plotly::ggplotly(res_plot,height = 1200, width = 1800)
   plot <- plot %>% plotly::layout(
-  margin = list(t = 60),
+  margin = list(t = 90),
   xaxis = list(
     tickangle = -90  # Rotate labels vertically
     )
