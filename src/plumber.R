@@ -800,7 +800,7 @@ function(efoId, rankGenesBy, includeBoxplot, boxplotYAxisScale) {
   margin = list(t = 90),
   titlefont = list(size = 18),
   xaxis = list(
-    tickangle = -90  # Rotate labels vertically
+    tickangle = -315  # Rotate labels vertically
     )
   )
   plot
@@ -888,7 +888,7 @@ function(ensemblId, includeBoxplot, boxplotYAxisScale) {
   plot <- plot %>% plotly::layout(
   margin = list(t = 90),
   xaxis = list(
-    tickangle = -90  # Rotate labels vertically
+    tickangle = -315 
     )
   )
   plot
